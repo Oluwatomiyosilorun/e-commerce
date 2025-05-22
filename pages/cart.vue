@@ -16,7 +16,7 @@
         <img
           :src="getImage(item.id)"
           alt="Product image"
-          class="w-16 h-16 object-cover rounded mr-4 m-auto"
+          class="w-16 h-16 object-cover rounded m-auto"
         />
         <div class="flex-1 p-4">
           <h2 class="text-xl font-medium">{{ item.title }}</h2>

@@ -1,18 +1,46 @@
 <template>
-  <div>
-    <div class="flex space-x-4 mb-4">
-      <input v-model="search" placeholder="Search…" class="border p-2 flex-1" />
-      <div>
-        <label>Min:</label>
-        <input type="number" v-model.number="min" class="border p-1 w-20" />
-        <label class="ml-2">Max:</label>
-        <input type="number" v-model.number="max" class="border p-1 w-20" />
+  <div class="p-4 max-w-5xl mx-auto">
+    <!-- Search & Controls -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+      <!-- Text search -->
+      <input
+        v-model="search"
+        placeholder="Search…"
+        class="w-full sm:w-1/3 border rounded-lg p-2 focus:ring focus:outline-none"
+      />
+
+      <!-- Price range -->
+      <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+        <div class="flex items-center gap-2">
+          <label for="min" class="whitespace-nowrap">Min:</label>
+          <input
+            id="min"
+            type="number"
+            v-model.number="min"
+            class="w-full sm:w-20 border rounded-lg p-2 focus:ring focus:outline-none"
+          />
+        </div>
+        <div class="flex items-center gap-2">
+          <label for="max" class="whitespace-nowrap">Max:</label>
+          <input
+            id="max"
+            type="number"
+            v-model.number="max"
+            class="w-full sm:w-20 border rounded-lg p-2 focus:ring focus:outline-none"
+          />
+        </div>
       </div>
-      <NuxtLink to="/cart" class="px-4 py-2 bg-green-600 text-white rounded-xl">
+
+      <!-- Cart button -->
+      <NuxtLink
+        to="/cart"
+        class="block text-center sm:inline-block px-4 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition"
+      >
         Cart ({{ cart.items.length }})
       </NuxtLink>
     </div>
 
+    <!-- Product grid -->
     <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
       <ProductCard
         v-for="p in filtered"
@@ -37,14 +65,18 @@ const products = useProductStore()
 const cart = useCartStore()
 
 onMounted(() => {
-  products.fetchAll()
+  if (!products.items.length) {
+    products.fetchAll()
+  }
 })
 
 const filtered = computed(() =>
-  products.items.filter(p => {
-    const matchText = [p.title, p.category].some(f => f.toLowerCase().includes(search.value.toLowerCase()))
-    const matchPrice = p.price >= min.value && p.price <= max.value
-    return matchText && matchPrice
+  products.items.filter((p: { title: string; category: string; price: number }) => {
+    const textMatch =
+      p.title.toLowerCase().includes(search.value.toLowerCase()) ||
+      p.category.toLowerCase().includes(search.value.toLowerCase())
+    const priceMatch = p.price >= min.value && p.price <= max.value
+    return textMatch && priceMatch
   })
 )
 </script>
