@@ -1,75 +1,29 @@
-# Nuxt Minimal Starter
+# Project
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A simple e-commerce single­page application built with Nuxt 3, Pinia for state management, Tailwind CSS for styling, and Axios for data fetching. This project demonstrates product listing, search/filters, a shopping cart with quantity controls, and a checkout modal.
 
-## Setup
 
-Make sure to install dependencies:
+# Feature
+    - Fetch products from Fake Store API via Axios
+    - Global state management with Pinia
+    - Responsive grid layout with Tailwind CSS
+    - Search by title/category and price range filters
+    - Add/remove items, adjust quantities in cart
+    - Modal checkout form collecting card details
+    - Stock decrement on checkout
+    - Navigation between main shop page and cart
 
-```bash
-# npm
-npm install
+## Tech Stack
+    - Framework: Nuxt 3
+    - State: Pinia
+    - HTTP Client: Axios
+    - Styling: Tailwind CSS
+    - Language: TypeScript
 
-# pnpm
-pnpm install
 
-# yarn
-yarn install
+## Installation & Development
+    1. Clone the repo
+    2. Install dependencies (npm install)
+    3. Start dev server (npm run dev)
 
-# bun
-bun install
-```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
