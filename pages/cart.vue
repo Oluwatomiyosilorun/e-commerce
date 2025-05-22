@@ -59,7 +59,7 @@
           <p class="text-2xl font-bold">{{ '$' + cart.total.toFixed(2) }}</p>
         </div>
         <button
-          @click="openModal"
+          @click="checkout"
           class="px-6 py-3 bg-white text-blue-600 font-semibold rounded-xl shadow hover:shadow-lg transition"
         >
           Checkout
@@ -68,7 +68,7 @@
     </div>
 
     <!-- Payment Modal -->
-    <div
+    <!-- <div
       v-if="state.showModal"
       class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
     >
@@ -135,7 +135,7 @@
           </div>
         </form>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -165,12 +165,12 @@ const state = reactive({
   card: { name: '', number: '', expiry: '', cvv: '' }
 })
 
-function openModal() {
-  state.showModal = true
-}
-function closeModal() {
-  state.showModal = false
-}
+// function openModal() {
+//   state.showModal = true
+// }
+// function closeModal() {
+//   state.showModal = false
+// }
 
 function getImage(id: number): string {
   const prod = products.items.find((p: { id: number }) => p.id === id)
@@ -189,9 +189,14 @@ function remove(id: number) {
   cart.items = cart.items.filter((i: { id: number }) => i.id !== id)
 }
 
-function confirmPayment() {
+function checkout() {
   cart.checkout()
-  closeModal()
-  router.push('/')
+  alert('Thank you! Your order has been placed.')
 }
+
+// function confirmPayment() {
+//   cart.checkout()
+//   // closeModal()
+//   router.push('/')
+// }
 </script>
